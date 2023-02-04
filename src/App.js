@@ -17,6 +17,19 @@ function App() {
     setTask({ text: '', id: uniqid(), num: task.num + 1});
   }
   
+  const resetTaskNums = () => {
+    setTasks(prevTasks => {
+      return prevTasks.map(t => {
+        t.num = prevTasks.indexOf(t) + 1;
+        return t;
+      });
+    });
+    
+    setTask(prevTask => {
+      return { text: prevTask.text, id: prevTask.id, num: prevTask.num - 1 };
+    });
+  }
+  
   return (
     <div className="App">
       <form onSubmit={onSubmitTask}>
@@ -31,7 +44,11 @@ function App() {
           Add Task
         </button>
       </form>
-      <Overview tasks={tasks} />
+      <Overview
+        tasks={tasks}
+        setTasks={setTasks}
+        resetTaskNums={resetTaskNums}
+      />
     </div>
   );
 }
