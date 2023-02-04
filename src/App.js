@@ -5,16 +5,16 @@ import Overview from "./components/Overview";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState({ text: '', id: uniqid()});
+  const [task, setTask] = useState({ text: '', id: uniqid(), num: 1});
   
   const handleChange = (e) => {
-    setTask({ text: e.target.value, id: task.id});
+    setTask({ text: e.target.value, id: task.id, num: task.num});
   };
   
   const onSubmitTask = (e) => {
     e.preventDefault();
     setTasks(prevTasks => prevTasks.concat(task));
-    setTask({ text: '', id: uniqid()});
+    setTask({ text: '', id: uniqid(), num: task.num + 1});
   }
   
   return (
